@@ -1,16 +1,21 @@
-import gpiozero
+from gpiozero import MotionSensor
+from gpiozero import LED
+from state_machine import StateMachine
+from func_timeout import *
+import time
 
-#variables
-motor_ID = 1
-P_sensor = 2
-motor_ID2 = 3
-M_sensor = 4
+pir = MotionSensor(4)
+led = LED(17)
 
+states = StateMachine()
 
-#Pressure sensor
-if() {
-    #wait for change in pressure sensor again
-
-}
-
-print("Hi")
+led.off()
+while True:
+     if pir.motion_detected:
+         print("Motion detected")
+         led.on()
+         states.on_event('m')
+         time.sleep(7)
+     else:
+         print("No Motion")
+         led.off() 
