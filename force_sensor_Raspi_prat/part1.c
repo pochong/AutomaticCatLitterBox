@@ -7,7 +7,7 @@
 #include <wiringPi.h>
 
 #define BAUDRATE B115200 // UART speed
-#define LED_PIN 1
+//#define LED_PIN 1
 
 
 int main (int argc, char * argv[]){
@@ -16,7 +16,7 @@ int main (int argc, char * argv[]){
   char* dev_id = "/dev/serial0"; // UART device identifier
   char rxbuffer[1]; // Receive data buffer
   wiringPiSetup();
-  pinMode(LED_PIN, PWM_OUTPUT);
+  //pinMode(LED_PIN, PWM_OUTPUT);
   printf("Opening %s\n", dev_id);
   int fd = open(dev_id, O_RDWR | O_NOCTTY | O_NDELAY);
   // O_RDWR indicates the device needs to both written and read.
@@ -54,7 +54,7 @@ int main (int argc, char * argv[]){
       return -1;
     }
     printf("%d\n",rxbuffer[0]*5);
-    pwmWrite(LED_PIN,rxbuffer[0]*5);
+    //pwmWrite(LED_PIN,rxbuffer[0]*5);
   }
   close(fd);
 }

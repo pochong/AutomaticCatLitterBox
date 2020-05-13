@@ -3,7 +3,7 @@ from gpiozero import LED
 import time
 
 
-pir = MotionSensor(4)
+pir = MotionSensor(21)
 led = LED(17)
 
 led.off()
