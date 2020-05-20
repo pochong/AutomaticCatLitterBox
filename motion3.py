@@ -11,7 +11,7 @@ while True:
      if pir.motion_detected:
          print("Motion detected")
          led.on()
-         time.sleep(7)
+         time.sleep(1)
      else:
          print("No Motion")
          led.off()
