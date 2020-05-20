@@ -7,15 +7,15 @@ class Initial(State):
     def on_event(self, event):
         if(event == 'p'):
             return PressureON()
-
-        return self
+        else:
+            return self
 
 class PressureON(State):
     def on_event(self, event):
         if(event == 'o'):
             return StartTimer()
-
-        return self
+        else:
+            return self
 
 class StartTimer(State):
     def on_event(self, event):
@@ -25,15 +25,19 @@ class Wait5Sec(State):
     def on_event(self, event):
         if(event == 'p' or event == 'm' or event == 'n'):
             return PressureON()
-        else:
+        elif(event == 't'):
             return StartOperation()
+        else:
+            return self
 
 class StartOperation(State):
     def on_event(self, event):
         if(event == 'p' or event == 'm' or event == 'n'):
             return SaveState()
-        else:
+        elif(event == 't'):
             return Initial()
+        else:
+            return self
 
 class SaveState(State):
      def on_event(self, event):
