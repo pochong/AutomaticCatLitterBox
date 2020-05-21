@@ -14,26 +14,15 @@ kit = ServoKit(channels=16)
     #print("in 0 throttle")
     #time.sleep(20)
     #kit.continuous_servo[0].throttle = -1
-  
-#kit.servo[0].actuation_range = 180
-
-#kit.servo[11].angle = 90
-#kit.servo[12].angle = 180
-#time.sleep(1)
 kit.continuous_servo[15].throttle = 0.5
 #kit.continuous_servo[8].throttle = 1
 t = time.time()
 #print(t)
 time.sleep(4)
-#kit.continuous_servo[15].throttle = -0.5
-#kit.continuous_servo[8].throttle = -1
-#time.sleep(2)
-#kit.servo[11].angle = 0
-#kit.servo[12].angle = 0
-#kit.continuous_servo[15].throttle = 0
-#time.sleep(2)
+kit.continuous_servo[15].throttle = -0.5
+time.sleep(2)
 p = time.time()
-print(p-t)
+print(10 - (p-t))
 kit.continuous_servo[15].throttle = -0.1111111
 #kit.continuous_servo[8].throttle = 0
 #time.sleep(0.1)
