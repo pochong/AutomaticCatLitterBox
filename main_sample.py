@@ -139,3 +139,7 @@ while True:
              if(timer3_started == True):
                  timer3_started = False
                  timer3.cancel()
+        else:
+            if(name == "MotionOnly" or name == "MotionOnly_I"):
+                print("No motion detected")
+                states.on_event('n')

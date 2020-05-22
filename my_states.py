@@ -25,12 +25,24 @@ class StartTimer(State):
 
 class Wait5Sec(State):
     def on_event(self, event):
-        if(event == 'p' or event == 'm'):
+        if(event == 'p'):
             return PressureON()
         elif(event == 't'):
             return Operation()
+        elif(event == 'm'):
+            return MotionOnly()
         else:
             print("Still in Wait5Sec")
+            return self
+        
+class MotionOnly(State):
+    def on_event(self, event):
+        if(event == 'n'):
+            return Wait5Sec()
+        elif(event == 'p'):
+            return PressureON()
+        else:
+            print("Still in MotionOnly")
             return self
 
 class Operation(State):
@@ -77,14 +89,26 @@ class InverseOperation(State):
         
 class Wait5Sec_I(State):
     def on_event(self, event):
-        if(event == 'p' or event == 'm'):
+        if(event == 'p'):
             return Pressure_I_ON()
         elif(event == 't'):
             return InverseOperation()
+        elif(event == 'm'):
+            return MotionOnly_I()
         else:
             print("Still in Wait5Sec_I")
             return self
-        
+
+class MotionOnly_I(State):
+    def on_event(self, event):
+        if(event == 'n'):
+            return Wait5Sec_I()
+        elif(event == 'p'):
+            return Pressure_I_ON()
+        else:
+            print("Still in MotionOnly_I")
+            return self       
+
 class Pressure_I_ON(State):
     def on_event(self, event):
         if(event == 'o'):
