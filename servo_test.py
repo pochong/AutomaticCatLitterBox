@@ -1,3 +1,6 @@
+# servo_test
+# used for testing the different methods and ways of controlling a motor
+
 from adafruit_servokit import ServoKit
 import time
 

@@ -1,3 +1,7 @@
+# main_test
+# This is testing whether the state machine works as intended by
+# getting user inputs to substitute sensor input
+
 from state_machine import StateMachine
 from func_timeout import *
 import time
@@ -5,68 +9,36 @@ import time
 states = StateMachine()
 timer = time.time()
 
+#used for substituting the time waiting part of the state machine
 def Timer():
-    while 1:
-        time.time()
+    events = input()
+    return events
 
-def GoNextState_p():
-    time.sleep(0.002)
-    states.on_event('p')
+while 1:
+    event = input()
+    states.on_event(event)
+    #print(states.state)
+    #print(name)
+    name = str(states.state)
+    #print(name == 'Wait5Sec' or name  == "Wait5Sec_I")
+    if(name == 'Wait5Sec'):
+        try:
+            events = func_timeout(5, Timer)
+            states.on_event(events)
+        except FunctionTimedOut:
+            print("Timed Out")
+            events = 't'
+            states.on_event(events)
+    name = str(states.state)
+    if(name == 'Operation' or name == 'InverseOperation'):
+        try:
+            events = func_timeout(10,Timer)
+            states.on_event(events)
+        except FunctionTimedOut:
+            print("Finished")
+            events = 't'
+            states.on_event(events)
+    name = str(states.state)
 
-def GoNextState_n():
-    time.sleep(0.004)
-    states.on_event('n')
-
-def GoNextState_m():
-    time.sleep(0.001)
-    states.on_event('m')
-
-#ticks = time.time()
-#print("time difference: ", ticks - timer)
-states.on_event('p')
-#name = str(states.state)
-states.on_event('o')
-states.on_event('m')    #useless input to move to next state
-try:                    #Wait5Sec
-    func_timeout(0.005,GoNextState_p)
-except FunctionTimedOut:
-    print("Finished_Wait5Sec")
-    states.on_event('p')
-states.on_event('p')
-states.on_event('o')
-states.on_event('n')    #useless input to move to next state
-try:                    #Wait5Sec
-    func_timeout(0.005,Timer)
-except FunctionTimedOut:
-    print("Finished_Wait5Sec_2nd")
-    states.on_event('d')
-try:                    #StartOperation
-    func_timeout(0.010,GoNextState_m)
-except FunctionTimedOut:
-    print("Finished_StartOperation")
-    states.on_event('d')
-try:                    #SaveState
-    func_timeout(0.005,GoNextState_p)
-except FunctionTimedOut:
-    print("Finished_SaveState")
-    states.on_event('d')
-try:                    #SaveState
-    func_timeout(0.005,Timer)
-except FunctionTimedOut:
-    print("Finished_SaveState_2nd")
-    states.on_event('d')
-try:                    #ResumeOperation
-    func_timeout(0.007,GoNextState_n)
-except FunctionTimedOut:
-    print("Finished_ResumeOperation")
-    states.on_event('d')
-try:                    #SaveState
-    func_timeout(0.005,Timer)
-except FunctionTimedOut:
-    print("Finished")
-    states.on_event('d')
-try:                    #ResumeOperation
-    func_timeout(0.005,Timer)
-except FunctionTimedOut:
-    print("Finished")
-    states.on_event('d')
+        
+    

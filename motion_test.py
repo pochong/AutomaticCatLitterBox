@@ -1,3 +1,6 @@
+# motion3
+# used for testing the the motion PIR sensor
+
 from gpiozero import MotionSensor
 from gpiozero import LED
 import time

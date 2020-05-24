@@ -1,6 +1,15 @@
+# my_states
+# This is the declaration of all the different states of the 
+# state machine. Include the state of where to go next
+# depending on the inputs of the sensors
+
+# 'p' stands for cat on the pressure sensor, creating a change in pressure
+# 'o' stands for the cat leaving the pressure sensor, creating a change in pressure
+# 't' stands for the timer is up
+# 'm' stands detected motion in PIR motion sensor
+# 'n' stands for no motion detected in PIR motion sensor
+
 from state import State
-
-
 
 class Initial(State):
 
@@ -18,10 +27,6 @@ class PressureON(State):
         else:
             print("still in PressureON")
             return self
-
-class StartTimer(State):
-    def on_event(self, event):
-        return Wait5Sec()
 
 class Wait5Sec(State):
     def on_event(self, event):

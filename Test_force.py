@@ -1,3 +1,6 @@
+# Test_force
+# used for testing the different ways of getting the signals of the force sensor
+
 import serial
 import sys
 from time import sleep

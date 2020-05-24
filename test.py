@@ -1,3 +1,6 @@
+# test
+# This test file is used for testing the Timer function and also the RepeatableTimer function
+
 from threading import Timer
 from repeatableTimer import RepeatableTimer
 import time
